@@ -1,0 +1,149 @@
+==========================================
+DGL 源码编译安装 / Building DGL from Source
+==========================================
+
+[1;33m1. 检查当前环境 / Checking current environment[0m
+Conda environment: cuda12.1
+Python version: Python 3.11.13
+PyTorch version: 2.6.0+cu124
+CUDA available: True
+
+[1;33m2. 创建构建目录 / Creating build directory[0m
+
+[1;33m3. 安装编译依赖 / Installing build dependencies[0m
+
+[1;33m4. 克隆 DGL 仓库 / Cloning DGL repository[0m
+正在克隆 DGL (可能需要几分钟)... / Cloning DGL (may take a few minutes)...
+Cloning into 'dgl'...
+Updating files:  26% (579/2207)Updating files:  27% (596/2207)Updating files:  28% (618/2207)Updating files:  29% (641/2207)Updating files:  30% (663/2207)Updating files:  31% (685/2207)Updating files:  32% (707/2207)Updating files:  33% (729/2207)Updating files:  34% (751/2207)Updating files:  35% (773/2207)Updating files:  36% (795/2207)Updating files:  37% (817/2207)Updating files:  38% (839/2207)Updating files:  39% (861/2207)Updating files:  40% (883/2207)Updating files:  41% (905/2207)Updating files:  42% (927/2207)Updating files:  43% (950/2207)Updating files:  44% (972/2207)Updating files:  45% (994/2207)Updating files:  46% (1016/2207)Updating files:  47% (1038/2207)Updating files:  48% (1060/2207)Updating files:  49% (1082/2207)Updating files:  50% (1104/2207)Updating files:  51% (1126/2207)Updating files:  51% (1144/2207)Updating files:  52% (1148/2207)Updating files:  53% (1170/2207)Updating files:  54% (1192/2207)Updating files:  55% (1214/2207)Updating files:  56% (1236/2207)Updating files:  57% (1258/2207)Updating files:  58% (1281/2207)Updating files:  59% (1303/2207)Updating files:  60% (1325/2207)Updating files:  61% (1347/2207)Updating files:  62% (1369/2207)Updating files:  63% (1391/2207)Updating files:  64% (1413/2207)Updating files:  65% (1435/2207)Updating files:  66% (1457/2207)Updating files:  67% (1479/2207)Updating files:  68% (1501/2207)Updating files:  69% (1523/2207)Updating files:  70% (1545/2207)Updating files:  71% (1567/2207)Updating files:  72% (1590/2207)Updating files:  73% (1612/2207)Updating files:  74% (1634/2207)Updating files:  75% (1656/2207)Updating files:  76% (1678/2207)Updating files:  77% (1700/2207)Updating files:  78% (1722/2207)Updating files:  79% (1744/2207)Updating files:  79% (1752/2207)Updating files:  80% (1766/2207)Updating files:  81% (1788/2207)Updating files:  82% (1810/2207)Updating files:  83% (1832/2207)Updating files:  84% (1854/2207)Updating files:  85% (1876/2207)Updating files:  86% (1899/2207)Updating files:  87% (1921/2207)Updating files:  88% (1943/2207)Updating files:  89% (1965/2207)Updating files:  90% (1987/2207)Updating files:  91% (2009/2207)Updating files:  92% (2031/2207)Updating files:  93% (2053/2207)Updating files:  94% (2075/2207)Updating files:  95% (2097/2207)Updating files:  96% (2119/2207)Updating files:  97% (2141/2207)Updating files:  98% (2163/2207)Updating files:  99% (2185/2207)Updating files: 100% (2207/2207)Updating files: 100% (2207/2207), done.
+Submodule 'third_party/GKlib' (https://github.com/KarypisLab/GKlib.git) registered for path 'third_party/GKlib'
+Submodule 'third_party/METIS' (https://github.com/KarypisLab/METIS.git) registered for path 'third_party/METIS'
+Submodule 'third_party/cccl' (https://github.com/NVIDIA/cccl.git) registered for path 'third_party/cccl'
+Submodule 'third_party/cuco' (https://github.com/NVIDIA/cuCollections.git) registered for path 'third_party/cuco'
+Submodule 'third_party/dlpack' (https://github.com/dmlc/dlpack.git) registered for path 'third_party/dlpack'
+Submodule 'third_party/dmlc-core' (https://github.com/dmlc/dmlc-core.git) registered for path 'third_party/dmlc-core'
+Submodule 'third_party/googletest' (https://github.com/google/googletest.git) registered for path 'third_party/googletest'
+Submodule 'third_party/liburing' (https://github.com/axboe/liburing.git) registered for path 'third_party/liburing'
+Submodule 'third_party/libxsmm' (https://github.com/hfp/libxsmm.git) registered for path 'third_party/libxsmm'
+Submodule 'third_party/nanoflann' (https://github.com/jlblancoc/nanoflann) registered for path 'third_party/nanoflann'
+Submodule 'third_party/pcg' (https://github.com/imneme/pcg-cpp.git) registered for path 'third_party/pcg'
+Submodule 'third_party/taskflow' (https://github.com/taskflow/taskflow.git) registered for path 'third_party/taskflow'
+Submodule 'third_party/tsl_robin_map' (https://github.com/Tessil/robin-map.git) registered for path 'third_party/tsl_robin_map'
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/GKlib'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/METIS'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/cccl'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/cuco'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/dlpack'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/dmlc-core'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/googletest'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/liburing'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/libxsmm'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/nanoflann'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/pcg'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/taskflow'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/tsl_robin_map'...
+Submodule path 'third_party/GKlib': checked out '8bd6bad750b2b0d90800c632cf18e8ee93ad72d7'
+Submodule path 'third_party/METIS': checked out 'e0f1b88b8efcb24ffa0ec55eabb78fbe61e58ae7'
+Submodule path 'third_party/cccl': checked out '709ddec37ff87e6087097ed6e49526dac21dcbc9'
+Submodule path 'third_party/cuco': checked out '4454de4b878f31d41c5b7578fe6ca24bba5ea3f4'
+Submodule path 'third_party/dlpack': checked out 'e2bdd3bee8cb6501558042633fa59144cc8b7f5f'
+Submodule path 'third_party/dmlc-core': checked out 'bfad207b448480783a1f428ae3d93d87032d8349'
+Submodule path 'third_party/googletest': checked out 'f8d7d77c06936315286eb55f8de22cd23c188571'
+Submodule path 'third_party/liburing': checked out 'f7dcc1ea60819475dffd3a45059e16f04381bee7'
+From https://github.com/hfp/libxsmm
+ * branch                80090603e43f6ddc870cc42e1403dd0af07744cc -> FETCH_HEAD
+Submodule path 'third_party/libxsmm': checked out '80090603e43f6ddc870cc42e1403dd0af07744cc'
+Submodule path 'third_party/nanoflann': checked out '4c47ca200209550c5628c89803591f8a753c8181'
+Submodule path 'third_party/pcg': checked out '428802d1a5634f96bcd0705fab379ff0113bcf13'
+Submodule path 'third_party/taskflow': checked out '7d9e85b6b2e9bf501021f857f2f3cbe43bc37c85'
+Submodule path 'third_party/tsl_robin_map': checked out '1115dad3ffa0994e3f43b693d9b9cc99944c64c1'
+
+[1;33m5. 检出稳定版本 / Checking out stable version[0m
+warning: unable to rmdir 'third_party/GKlib': Directory not empty
+warning: unable to rmdir 'third_party/cuco': Directory not empty
+warning: unable to rmdir 'third_party/liburing': Directory not empty
+warning: unable to rmdir 'third_party/taskflow': Directory not empty
+warning: unable to rmdir 'third_party/tsl_robin_map': Directory not empty
+Note: switching to 'v1.1.3'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 6e2c0f48 use cccl (#6694)
+M	third_party/METIS
+M	third_party/cccl
+Submodule 'third_party/phmap' (https://github.com/greg7mdp/parallel-hashmap.git) registered for path 'third_party/phmap'
+Submodule 'third_party/tensorpipe' (https://github.com/pytorch/tensorpipe) registered for path 'third_party/tensorpipe'
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/phmap'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/tensorpipe'...
+Submodule path 'third_party/METIS': checked out '10603482cc055626ff99d2ac3ab7e73d1119439d'
+Submodule 'GKlib' (https://github.com/KarypisLab/GKlib.git) registered for path 'third_party/METIS/GKlib'
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/METIS/GKlib'...
+Submodule path 'third_party/METIS/GKlib': checked out '62de20c7f97c719abdc96d7c3e266a1f7cb52bc5'
+Submodule path 'third_party/cccl': checked out '4d5c181cb4e67b14e7d1fdeb45cf0104119bfb09'
+Submodule path 'third_party/phmap': checked out '25293cefd8b85491b45600c03fe8edf07647553f'
+Submodule path 'third_party/tensorpipe': checked out '6042f1a4cbce8eef997f11ed0012de137b317361'
+Submodule 'third_party/googletest' (https://github.com/google/googletest.git) registered for path 'third_party/tensorpipe/third_party/googletest'
+Submodule 'third_party/libnop' (https://github.com/google/libnop.git) registered for path 'third_party/tensorpipe/third_party/libnop'
+Submodule 'third_party/libuv' (https://github.com/libuv/libuv.git) registered for path 'third_party/tensorpipe/third_party/libuv'
+Submodule 'third_party/pybind11' (https://github.com/pybind/pybind11.git) registered for path 'third_party/tensorpipe/third_party/pybind11'
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/tensorpipe/third_party/googletest'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/tensorpipe/third_party/libnop'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/tensorpipe/third_party/libuv'...
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/tensorpipe/third_party/pybind11'...
+Submodule path 'third_party/tensorpipe/third_party/googletest': checked out 'aee0f9d9b5b87796ee8a0ab26b7587ec30e8858e'
+Submodule path 'third_party/tensorpipe/third_party/libnop': checked out 'aa95422ea8c409e3f078d2ee7708a5f59a8b9fa2'
+Submodule path 'third_party/tensorpipe/third_party/libuv': checked out '1dff88e5161cba5c59276d2070d2e304e4dcb242'
+Submodule path 'third_party/tensorpipe/third_party/pybind11': checked out 'a23996fce38ff6ccfbcdc09f1e63f2c4be5ea2ef'
+Submodule 'tools/clang' (https://github.com/wjakob/clang-cindex-python3) registered for path 'third_party/tensorpipe/third_party/pybind11/tools/clang'
+Cloning into '/home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/third_party/tensorpipe/third_party/pybind11/tools/clang'...
+Submodule path 'third_party/tensorpipe/third_party/pybind11/tools/clang': checked out '6a00cbc4a9b8e68b71caf7f774b3f9c753ae84d5'
+
+[1;33m6. 查找 CUDA 安装路径 / Finding CUDA installation[0m
+CUDA path: /usr/local/cuda
+[0;31m警告: 未找到 nvcc，将尝试不使用 CUDA 编译[0m
+[0;31mWarning: nvcc not found, will try to build without CUDA[0m
+
+[1;33m7. 配置 CMake / Configuring CMake[0m
+仅使用 CPU 编译 / Building with CPU only
+-- The C compiler identification is GNU 4.8.5
+-- The CXX compiler identification is GNU 4.8.5
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Start configuring project dgl
+-- Performing Test SUPPORT_CXX14
+CMake Error in /home/qlyu/AA_peptide/pepland/claude_test/dgl_build/dgl/build/CMakeFiles/CMakeScratch/TryCompile-gblzLY/CMakeLists.txt:
+  Target "cmTC_c1cd6" requires the language dialect "CXX17" (with compiler
+  extensions).  But the current compiler "GNU" does not support this, or
+  CMake does not know the flags to enable it.
+
+
+CMake Error at /home/qlyu/anaconda3/envs/cuda12.1/lib/python3.11/site-packages/cmake/data/share/cmake-4.1/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile):
+  Failed to generate test project build system.
+Call Stack (most recent call first):
+  /home/qlyu/anaconda3/envs/cuda12.1/lib/python3.11/site-packages/cmake/data/share/cmake-4.1/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)
+  /home/qlyu/anaconda3/envs/cuda12.1/lib/python3.11/site-packages/cmake/data/share/cmake-4.1/Modules/CheckCXXCompilerFlag.cmake:103 (cmake_check_compiler_flag)
+  CMakeLists.txt:167 (check_cxx_compiler_flag)
+
+
+-- Configuring incomplete, errors occurred!

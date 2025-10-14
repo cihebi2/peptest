@@ -1,0 +1,51 @@
+# Fine-tuning Configuration
+
+# Model
+model:
+  pretrained_path: ./checkpoints/pretrained_model.pt
+  hidden_dim: 512
+  
+# Fine-tuning Strategy
+finetuning:
+  strategy: adapter  # adapter, lora, full, multitask
+  
+  # Adapter settings
+  adapter:
+    adapter_dim: 64
+  
+  # LoRA settings
+  lora:
+    rank: 8
+    alpha: 16
+  
+  # Multi-task settings
+  multitask:
+    tasks: [binding, cpp, solubility]
+
+# Training
+training:
+  optimizer:
+    type: AdamW
+    lr: 0.0001
+    weight_decay: 0.01
+  
+  scheduler:
+    type: cosine
+    warmup_steps: 1000
+  
+  batch_size: 128
+  epochs: 50
+  use_amp: true
+  grad_clip: 1.0
+
+# Task-specific settings
+tasks:
+  binding:
+    loss: mse
+    metric: pearson
+  cpp:
+    loss: cross_entropy
+    metric: auc
+  solubility:
+    loss: mse
+    metric: rmse

@@ -1,0 +1,89 @@
+# Pre-training Configuration for Improved PepLand
+
+# Model Architecture
+model:
+  name: ImprovedPepLand
+  hidden_dim: 512          # Increased from 300
+  num_layers: 12           # Increased from 5
+  num_heads: 8
+  dropout: 0.1
+  use_performer: true      # Use Performer for efficiency
+  use_virtual_node: true   # Virtual nodes for global info
+  
+  # Input dimensions
+  atom_dim: 42
+  bond_dim: 14
+  fragment_dim: 196
+
+# Pre-training Strategy
+pretraining:
+  # Contrastive Learning
+  contrastive:
+    enabled: true
+    temperature: 0.07
+    projection_dim: 256
+    queue_size: 65536      # For MoCo
+    momentum: 0.999
+    
+    # Augmentation
+    augmentation:
+      strategy: 'mixed'     # weak, strong, mixed
+      node_drop: 0.1
+      edge_perturb: 0.1
+      feature_mask: 0.15
+  
+  # Generative Tasks
+  generative:
+    enabled: true
+    mask_ratio: 0.15
+    tasks:
+      - masked_atoms
+      - masked_fragments
+      - graph_properties
+  
+  # Task Weights
+  task_weights:
+    contrastive: 1.0
+    generative: 0.3
+
+# Training
+training:
+  # Optimization
+  optimizer:
+    type: AdamW
+    lr: 0.0001
+    weight_decay: 0.01
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+  
+  # Learning Rate Schedule
+  scheduler:
+    type: cosine
+    warmup_steps: 10000
+    T_0: 10000
+    min_lr: 1.0e-6
+  
+  # Data
+  batch_size: 256
+  num_workers: 4
+  epochs: 100
+  
+  # Mixed Precision
+  use_amp: true
+  grad_clip: 1.0
+  
+  # Curriculum Learning
+  curriculum:
+    enabled: true
+    num_stages: 5
+    difficulty_metric: complexity
+
+# Hardware
+device: cuda
+num_gpus: 4
+
+# Logging
+logging:
+  log_interval: 100
+  checkpoint_interval: 1000
+  save_dir: ./checkpoints
